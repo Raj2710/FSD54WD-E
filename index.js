@@ -103,3 +103,25 @@
 //     value.forEach(e=>console.log(`${e.status} - ${e.status==='fulfilled'?e.value:e.reason}`))
 // })
 // .catch(error => console.error(error))
+
+
+
+fetch('https://restcountries.com/v3.1/all',{method:'GET'})
+.then(req=>req.json())//string buffer to json
+.then(data=>createCards(data))//using the data
+.catch(error=>console.error(error))
+
+function createCards(data)
+{
+    data.forEach((e)=>{
+        console.log(e)
+
+        let div = document.getElementById('root')
+        let card = document.createElement('div')
+        card.innerHTML=`<div class='card-wrapper'>
+                            <h1>${e.name.common}</h1>
+                            <img src="${e.flags.png}" />
+                        </div>`
+        div.appendChild(card)   
+    })
+}
